@@ -4,7 +4,7 @@ function RqlConnector(LoginGuid, SessionKey) {
   this.DCOM = 'DCOM';
   this.WebService11 = 'WebService11';
   this.WebService11Url = '/CMS/WebService/RqlWebService.svc';
-  this.RqlConnectionType = "";
+  this.RqlConnectionType = '';
   this.InitializeConnectionType();
 }
 
@@ -20,7 +20,7 @@ RqlConnector.prototype.GetConnectionType =function ()
 
 RqlConnector.prototype.InitializeConnectionType =function ()
 {
-	if(this.GetConnectionType() == "")
+	if(this.GetConnectionType() == '')
 	{
 		if(this.TestConnection(this.WebService11Url))
 		{
@@ -69,7 +69,7 @@ RqlConnector.prototype.SendRqlWebService = function(InnerRQL, IsText, CallbackFu
 			}
 			else
 			{
-				data = $('<div/>').append(RetRql);
+				data = $.parseXML( $.trim(RetRql) );
 			}
 
 			CallbackFunc(data);
