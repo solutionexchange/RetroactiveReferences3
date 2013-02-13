@@ -2,6 +2,7 @@ function RqlConnector(LoginGuid, SessionKey) {
   this.LoginGuid = LoginGuid;
   this.SessionKey = SessionKey;
   this.DCOM = 'DCOM';
+  this.DCOMUrl = 'rqlaction.asp';
   this.WebService11 = 'WebService11';
   this.WebService11Url = '/CMS/WebService/RqlWebService.svc';
   this.RqlConnectionType = '';
@@ -84,7 +85,7 @@ RqlConnector.prototype.SendRqlWebService = function(InnerRQL, IsText, CallbackFu
 RqlConnector.prototype.SendRqlCOM = function(InnerRQL, IsText, CallbackFunc)
 {
 	var Rql = this.padRQLXML(InnerRQL, IsText);
-	$.post('rqlaction.asp', { rqlxml: Rql },
+	$.post(this.DCOMUrl, { rqlxml: Rql },
 	function(data){
 		data = $('<div/>').append(data);
 		CallbackFunc(data);
