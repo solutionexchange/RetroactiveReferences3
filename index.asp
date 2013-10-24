@@ -20,7 +20,7 @@
 	</style>
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="Rqlconnector.js"></script>
+	<script type="text/javascript" src="rqlconnector/Rqlconnector.js"></script>
 	<script type='text/javascript'>
 		var LoginGuid = '<%= session("loginguid") %>';
 		var SessionKey = '<%= session("sessionkey") %>';
@@ -56,7 +56,7 @@
 				var IsDynamicStructureElement = $(retXML).find('ELEMENT').attr('eltisdynamic');
 				
 				$('#selected-structural-element').append(StructureElementName);
-				$('#selected-structural-element img').attr('src', '../../icons/TreeType' + StructureElementType +'.gif');
+				$('#selected-structural-element img').attr('src', '/cms/icons/TreeType' + StructureElementType +'.gif');
 				LinkName = StructureElementName;
 				
 				if(IsDynamicStructureElement == '1')
@@ -132,9 +132,9 @@
 					RqlConnectorObj.SendRql(strRQLXML, false, function(retXML){
 						var ToBeReferencedLinkParentPageHeadline = $(retXML).find('PAGE').attr('headline');
 
-						$('#to-be-referenced-element-parent-page').append('<img src="../../icons/Page.gif" />');
+						$('#to-be-referenced-element-parent-page').append('<img src="/cms/icons/Page.gif" />');
 						$('#to-be-referenced-element-parent-page').append(ToBeReferencedLinkParentPageHeadline);
-						$('#to-be-referenced-element').append('<img src="../../icons/TreeType' + ToBeReferencedLinkType +'.gif" />');
+						$('#to-be-referenced-element').append('<img src="/cms/icons/TreeType' + ToBeReferencedLinkType +'.gif" />');
 						$('#to-be-referenced-element').append(ToBeReferencedLinkName);						
 						
 						displayToThread(ThreadId, 'ok', 'Item to be referenced loaded.', true, true);
@@ -148,9 +148,9 @@
 				RqlConnectorObj.SendRql(strRQLXML, false, function(retXML){
 					var ToBeReferencedPageHeadline = $(retXML).find('PAGE').attr('headline');
 					$('#targeteditem').append('<div class="contentclass">&nbsp;</div>');
-					$('#targeteditem').append('<div class="structuralelement"><img src="../../icons/Page.gif" >&nbsp;' + ToBeReferencedPageHeadline + '</div>');
+					$('#targeteditem').append('<div class="structuralelement"><img src="/cms/icons/Page.gif" >&nbsp;' + ToBeReferencedPageHeadline + '</div>');
 					
-					$('#to-be-referenced-element').append('<img src="../../icons/Page.gif" />');
+					$('#to-be-referenced-element').append('<img src="/cms/icons/Page.gif" />');
 					$('#to-be-referenced-element').append(ToBeReferencedPageHeadline);
 					
 					displayToThread(ThreadId, 'ok', 'Item to be referenced loaded.', true, true);
@@ -378,7 +378,7 @@
 					<th>Item to be Referenced</th>
 				</tr>
 				<tr>
-					<td id="content-class-name"><img src="../../icons/template.gif" /></td>
+					<td id="content-class-name"><img src="/cms/icons/template.gif" /></td>
 					<td id="to-be-referenced-element-parent-page"></td>
 				</tr>
 				<tr class="success">
