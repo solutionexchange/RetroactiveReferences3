@@ -125,14 +125,22 @@ RetroactiveReferences.prototype.DrawSelectedClipboardElement = function() {
 		Type = SelectedItem.attr('data-elttype');
 	}
 	
-	var Guid = SelectedItem.attr('guid');
+	var Guid = SelectedItem.attr('id');
 	if(!Guid){
 		Guid = SelectedItem.attr('data-guid');
 	}
 	
 	var Icon = SelectedItem.find('.clipboardImg').attr('src');
+	if(!Icon){
+		Icon = SelectedItem.find('img:last').attr('src');
+	}
 	
 	var Name = SelectedItem.find('.clipboardItemLabel').text();
+	if(!Name){
+		Name = SelectedItem.text();
+	}
+	
+	Name = $.trim(Name);
 	
 	ElementObj.guid = Guid;
 	ElementObj.name = Name;
