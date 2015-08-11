@@ -9,7 +9,7 @@ function RetroactiveReferences(RqlConnectorObj, ContentClassElementGuid, Content
 	this.TemplateTargetError = '#template-target-error';
 	this.TemplatePrereferenceInTemplate = '#template-pre-reference-in-template';
 	this.TemplateStatus = '#template-status';
-	
+
 	this.TemplateTypeMismatch = '#template-type-mismatch';
 	this.TemplateProcessingStatus = '#template-processing-status';
 	this.TemplateProcessingStatusClear = '#template-processing-status-clear';
@@ -46,7 +46,7 @@ RetroactiveReferences.prototype.Init = function(ContentClassElementGuid, Content
 		
 		if(!IsReferenceable){
 			ThisClass.UpdateArea(ThisClass.TemplateTypeMismatch);
-			
+
 			return;
 		}
 		
@@ -112,6 +112,7 @@ RetroactiveReferences.prototype.DrawSelectedClipboardElement = function() {
 	if(SelectedItem.length != 1){
 		ElementObj.name = 'Please select one item in clipboard.';
 		ThisClass.UpdateArea(ThisClass.TemplateTargetError, undefined, ElementObj);
+
 		return;
 	}
 	
@@ -122,14 +123,24 @@ RetroactiveReferences.prototype.DrawSelectedClipboardElement = function() {
 		Type = SelectedItem.attr('data-elttype');
 	}
 	
-	var Guid = SelectedItem.attr('guid');
+	var Guid = SelectedItem.attr('id');
+
 	if(!Guid){
 		Guid = SelectedItem.attr('data-guid');
 	}
 	
 	var Icon = SelectedItem.find('.clipboardImg').attr('src');
+
+	if(!Icon){
+		Icon = SelectedItem.find('img:last').attr('src');
+	}
 	
 	var Name = SelectedItem.find('.clipboardItemLabel').text();
+	if(!Name){
+		Name = SelectedItem.text();
+	}
+	
+	Name = $.trim(Name);
 	
 	ElementObj.guid = Guid;
 	ElementObj.name = Name;
@@ -177,7 +188,7 @@ RetroactiveReferences.prototype.DrawSelectedClipboardElement = function() {
 				ElementObj.name = Name;
 				ElementObj.type = Type;
 				ElementObj.icon = ThisClass.GetIconUrl(Type);
-				
+
 				ThisClass.UpdateArea(ThisClass.TemplateTarget, undefined, ElementObj);
 			});
 			break;
@@ -332,6 +343,7 @@ RetroactiveReferences.prototype.IsPrereferenceInTemplate = function() {
 
 RetroactiveReferences.prototype.PrereferenceInTemplate = function(SourceGuid, SourceTreeType, TargetGuid, TargetTreeType) {
 	var ThisClass = this;
+
 	var ElementObj = {
 		'name': 'content class element',
 		'guid': SourceGuid
@@ -363,6 +375,7 @@ RetroactiveReferences.prototype.PrereferenceInTemplate = function(SourceGuid, So
 			
 			ThisClass.RqlConnectorObj.SendRql(RqlXml, false, function(data){
 				// prereferenced
+
 				ThisClass.UpdateArea(ThisClass.TemplateProcessingStatusClear, ' .' + ElementObj.guid);
 			});
 		});

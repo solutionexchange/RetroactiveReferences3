@@ -83,7 +83,7 @@
 	
 	<script id="template-processing-status-clear" type="text/x-handlebars-template" data-container="#processing" data-action="replace">
 	</script>
-	
+
 	<script type="text/javascript">
 		var LoginGuid = '<%= session("loginguid") %>';
 		var SessionKey = '<%= session("sessionkey") %>';
