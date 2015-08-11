@@ -402,13 +402,26 @@ RetroactiveReferences.prototype.ReferenceAll = function(ContentClassGuid, Source
 	var ThisClass = this;
 
 	this.GetAllPageInstancesArray(ContentClassGuid, function(PageInstancesArray){
-		$.each(PageInstancesArray, function(){
-			ThisClass.ReferencePage(this, SourceName, TargetGuid, TargetTreeType);
-		});
+		ThisClass.ReferenceAllPages(PageInstancesArray, SourceName, TargetGuid, TargetTreeType);
 	});
 }
 
-RetroactiveReferences.prototype.ReferencePage = function(PageObj, SourceName, TargetGuid, TargetTreeType) {
+RetroactiveReferences.prototype.ReferenceAllPages = function(PageInstancesArray, SourceName, TargetGuid, TargetTreeType) {
+	var ThisClass =  this;
+	var PageObj = PageInstancesArray.shift();
+	
+	if(PageObj){
+		PageObj.remaining = PageInstancesArray.length;
+		
+		this.ReferencePage(PageObj, SourceName, TargetGuid, TargetTreeType, function(){
+			ThisClass.ReferenceAllPages(PageInstancesArray, SourceName, TargetGuid, TargetTreeType);
+		});
+	} else {
+		// done
+	}
+}
+
+RetroactiveReferences.prototype.ReferencePage = function(PageObj, SourceName, TargetGuid, TargetTreeType, CallbackFunc) {
 	var ThisClass = this;
 
 	if(PageObj)
@@ -433,6 +446,10 @@ RetroactiveReferences.prototype.ReferencePage = function(PageObj, SourceName, Ta
 			
 			ThisClass.RqlConnectorObj.SendRql(RqlXml, false, function(data){
 				ThisClass.UpdateArea(ThisClass.TemplateProcessingStatusClear, ' .' + PageObj.guid);
+				
+				if(CallbackFunc){
+					CallbackFunc();
+				}
 			});
 		});
 	}

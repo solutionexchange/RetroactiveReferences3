@@ -76,7 +76,11 @@
 	<script id="template-processing-status" type="text/x-handlebars-template" data-container="#processing" data-action="append">
 		<div class="{{guid}}">
 			<div class="alert">
-				<strong>Processing:</strong> {{name}}
+				<div><strong>Processing:</strong> {{name}}</div>
+				{{#if remaining}}
+					<br />
+					<div>{{remaining}} remaining</div>
+				{{/if}}
 			</div>
 		</div>
 	</script>
