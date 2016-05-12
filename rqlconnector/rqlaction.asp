@@ -1,7 +1,7 @@
 <%
 	Response.ContentType = "text/plain; charset=utf-8"
 
-    Session.Timeout = 180
+	Session.Timeout = 180
 	Server.ScriptTimeout = 180
 
 	Dim objIO	'Declare the objects
@@ -19,6 +19,8 @@
 	Set objIO = Nothing
 
 	If xmlData = "" Then
+		retXml = "<ERRORTEXT>" & sError & "</ERRORTEXT>"
+	ElseIf xmlData = "<IODATA>ERROR</IODATA>" Then
 		retXml = "<ERRORTEXT>" & sError & "</ERRORTEXT>"
 	Else
 		retXml = xmlData
