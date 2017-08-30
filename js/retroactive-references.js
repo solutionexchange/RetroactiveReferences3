@@ -281,6 +281,14 @@ RetroactiveReferences.prototype.GetIconUrl = function(Type) {
 			IconUrl = '/cms/icons/TreeType24.gif';
 			// Hit list  
 			break; 
+		case '2':
+			IconUrl = '/cms/icons/TreeType2.gif';
+			// Image  
+			break; 
+		case '38':
+			IconUrl = '/cms/icons/TreeType38.gif';
+			// Image  
+			break; 
 		default:
 			IconUrl = '/cms/icons/Page.gif';
 			break;
@@ -298,11 +306,11 @@ RetroactiveReferences.prototype.IsReferenceable = function(SourceGuid, SourceTyp
 	// Anchor as text, Anchor as image, Container, List, Page
 	var ReferenceableLinkTargetTypes = ['26', '27', '28', '13', '0'];
 	
-	// Standard Field - Text, Standard Field - Date, Standard Field - Time, Standard Field - Numeric, Standard Field - User defined, Standard Field - e-mail, Standard Field - URL
-	var ReferenceableElementSourceTypes = ['1', '5', '39', '48', '999', '50', '51'];
+	// Standard Field - Text, Standard Field - Date, Standard Field - Time, Standard Field - Numeric, Standard Field - User defined, Standard Field - e-mail, Standard Field - URL, Image, Media
+	var ReferenceableElementSourceTypes = ['1', '5', '39', '48', '999', '50', '51', '2', '38'];
 	
-	// Standard Field - Text, Standard Field - Date, Standard Field - Time, Standard Field - Numeric, Standard Field - User defined, Standard Field - e-mail, Standard Field - URL
-	var ReferenceableElementTargetTypes = ['1', '5', '39', '48', '999', '50', '51'];
+	// Standard Field - Text, Standard Field - Date, Standard Field - Time, Standard Field - Numeric, Standard Field - User defined, Standard Field - e-mail, Standard Field - URL, Image, Media
+	var ReferenceableElementTargetTypes = ['1', '5', '39', '48', '999', '50', '51', '2', '38'];
 	
 	if($.inArray(SourceType, ReferenceableLinkSourceTypes) > -1){
 		// link
